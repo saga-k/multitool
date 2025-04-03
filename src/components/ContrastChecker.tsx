@@ -8,6 +8,8 @@ export default function ContrastChecker() {
   const [color1, setColor1] = useState('#FFFFFF')
   const [color2, setColor2] = useState('#000000')
 
+  const [contrast, setContrast] = useState('')
+
   const hexToRgb = (hex:string) => {
     const clean = hex.replace('#', '')
     const bigint = parseInt(clean, 16)
@@ -51,7 +53,7 @@ export default function ContrastChecker() {
     const c2Lum = getLuminance(c2)
 
     const contrast = getContrast(c1Lum, c2Lum)
-    console.log(contrast)
+    setContrast(String(contrast.toFixed(2)))
   }
 
   return (
@@ -71,10 +73,24 @@ export default function ContrastChecker() {
       />
 
       <button type='submit'>Check contrast</button>
-
-      <p>{color1}</p>
-      <p>{color2}</p>
     </form>
+    {contrast &&
+    <table>
+      <caption>Contrast ratio: {contrast}</caption>
+      <thead>
+        <th>Type</th>
+        <th>AA</th>
+        <th>AAA</th>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Normal text</td>
+          <td>{Number(contrast) > 4.5 ? 'yes' : 'no'}</td>
+          <td>{Number(contrast) > 7 ? 'yes' : 'no'}</td>
+        </tr>
+      </tbody>
+    </table>}
     </section>
   )
 }
