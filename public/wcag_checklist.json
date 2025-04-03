@@ -1,0 +1,92 @@
+[
+  {
+    "section": "Text & readability",
+    "items": [
+      {
+        "text": "Text has sufficient contrast (\u2265 4.5:1 for normal text, \u2265 3:1 for large text)",
+        "checked": false
+      },
+      {
+        "text": "Text can be resized up to 200% without loss of content or functionality",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "section": "Color & visibility",
+    "items": [
+      {
+        "text": "Color is not the only way information is conveyed (e.g. not just red = error)",
+        "checked": false
+      },
+      {
+        "text": "Focus indicators (e.g. outlines when tabbing) are clearly visible",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "section": "Navigation",
+    "items": [
+      {
+        "text": "All functionality is accessible using a keyboard",
+        "checked": false
+      },
+      {
+        "text": "Tabbing order is logical and follows the visual layout",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "section": "Forms & inputs",
+    "items": [
+      {
+        "text": "All form fields have visible labels or accessible names (e.g. `label`, `aria-label`)",
+        "checked": false
+      },
+      {
+        "text": "Error messages are clear and describe what went wrong",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "section": "Responsive & adaptable",
+    "items": [
+      {
+        "text": "No horizontal scrolling is required on small screens",
+        "checked": false
+      },
+      {
+        "text": "Layout and content still make sense without color, images, or animations",
+        "checked": false
+      }
+    ]
+  },
+  {
+    "section": "Screen readers & accessible names",
+    "items": [
+      {
+        "text": "Content is structured with semantic HTML (`h1`, `nav`, `main`, `button`, etc.)",
+        "checked": false
+      },
+      {
+        "text": "All interactive elements have accessible names (`aria-label` or visible text)",
+        "checked": false
+      },
+      {
+        "text": "Icon-only buttons use `aria-label` or `aria-labelledby`",
+        "checked": false
+      },
+      {
+        "text": "Links and buttons clearly describe their purpose (never just 'Click here')",
+        "checked": false
+      },
+      {
+        "text": "`role` is only used when semantic HTML is not sufficient",
+        "checked": false
+      }
+    ]
+  }
+]

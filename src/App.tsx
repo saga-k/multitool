@@ -1,6 +1,7 @@
 import PxToRem from "./components/PxToRem"
 import './App.css'
 import ContrastChecker from "./components/ContrastChecker"
+import WcagChecklist from "./components/WcagChecklist"
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
     <>
     <PxToRem/>
     <ContrastChecker/>
+    <WcagChecklist/>
     </>
   )
 }

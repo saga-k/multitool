@@ -78,9 +78,11 @@ export default function ContrastChecker() {
     <table>
       <caption>Contrast ratio: {contrast} : 1</caption>
       <thead>
-        <th>Type</th>
-        <th>AA</th>
-        <th>AAA</th>
+        <tr>
+          <th>Type</th>
+          <th>AA</th>
+          <th>AAA</th>
+        </tr>
       </thead>
 
       <tbody>
