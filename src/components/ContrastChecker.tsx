@@ -76,7 +76,7 @@ export default function ContrastChecker() {
     </form>
     {contrast &&
     <table>
-      <caption>Contrast ratio: {contrast}</caption>
+      <caption>Contrast ratio: {contrast} : 1</caption>
       <thead>
         <th>Type</th>
         <th>AA</th>
@@ -85,9 +85,19 @@ export default function ContrastChecker() {
 
       <tbody>
         <tr>
-          <td>Normal text</td>
+          <th>Normal text</th>
           <td>{Number(contrast) > 4.5 ? 'yes' : 'no'}</td>
           <td>{Number(contrast) > 7 ? 'yes' : 'no'}</td>
+        </tr>
+        <tr>
+          <th>Large text</th>
+          <td>{Number(contrast) > 3.0 ? 'yes' : 'no'}</td>
+          <td>{Number(contrast) > 4.5 ? 'yes' : 'no'}</td>
+        </tr>
+        <tr>
+          <th>UI elements</th>
+          <td>{Number(contrast) > 3.0 ? 'yes' : 'no'}</td>
+          <td>{Number(contrast) > 3.0 ? 'yes' : 'no'}</td>
         </tr>
       </tbody>
     </table>}
