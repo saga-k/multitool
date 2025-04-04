@@ -1,6 +1,7 @@
 [
   {
     "section": "Text & readability",
+    "allChecked": false,
     "items": [
       {
         "id": "text-contrast",
@@ -16,6 +17,7 @@
   },
   {
     "section": "Color & visibility",
+    "allChecked": false,
     "items": [
       {
         "id": "color-convey",
@@ -31,6 +33,7 @@
   },
   {
     "section": "Navigation",
+    "allChecked": false,
     "items": [
       {
         "id": "keyboard-access",
@@ -46,6 +49,7 @@
   },
   {
     "section": "Forms & inputs",
+    "allChecked": false,
     "items": [
       {
         "id": "form-labels",
@@ -61,6 +65,7 @@
   },
   {
     "section": "Responsive & adaptable",
+    "allChecked": false,
     "items": [
       {
         "id": "no-horizontal-scroll",
@@ -76,6 +81,7 @@
   },
   {
     "section": "Screen readers & accessible names",
+    "allChecked": false,
     "items": [
       {
         "id": "semantic-html",

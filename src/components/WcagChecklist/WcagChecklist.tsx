@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import './WcagChecklist.module.css'
 
 export default function WcagChecklist() {
   interface checkListItems{
@@ -10,6 +11,7 @@ export default function WcagChecklist() {
 
   interface listObject{
     section:string,
+    allChecked: boolean
     items: checkListItems[]
   }
 
@@ -23,16 +25,17 @@ export default function WcagChecklist() {
 
   useEffect(() => {fetchList(),[]})
 
+
   return (
     <section>
-      {list && list.map(section =>
+      {list && list.map(listObject =>
         <div className='listTitle'
-        key={section.section}>
-          <h4>{section.section}</h4>
+        key={listObject.section}>
+          <h4>{listObject.section}</h4>
           <ul>
-          {section.items && section.items.map(item =>
+          {listObject.items && listObject.items.map(item =>
             <li className='listItem' key={item.id}>
-              <input type='checkbox'/>
+              <input type='checkbox' value={item.id} onChange={(e) => handleChange(e, listObject)}/>
               <p>{item.text}</p>
             </li>)}
           </ul>
@@ -41,3 +44,14 @@ export default function WcagChecklist() {
     </section>
   )
 }
+
+{/*
+function handleChange(e:React.ChangeEvent<HTMLInputElement>, listObject: listObject){
+  const l = [...list]
+  const s = l.find((obj) => obj.section === listObject.section)
+  const items = [...s.items]
+  console.log(items)
+  const found = items.find((item) => item.id === e.target.value)
+  console.log('found',found)
+  found.checked = e.target.checked;
+}*/}
