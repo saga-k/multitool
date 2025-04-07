@@ -1,6 +1,6 @@
 [
   {
-    "section": "Text & readability",
+    "title": "Text & readability",
     "allChecked": false,
     "items": [
       {
@@ -16,7 +16,7 @@
     ]
   },
   {
-    "section": "Color & visibility",
+    "title": "Color & visibility",
     "allChecked": false,
     "items": [
       {
@@ -32,7 +32,7 @@
     ]
   },
   {
-    "section": "Navigation",
+    "title": "Navigation",
     "allChecked": false,
     "items": [
       {
@@ -48,7 +48,7 @@
     ]
   },
   {
-    "section": "Forms & inputs",
+    "title": "Forms & inputs",
     "allChecked": false,
     "items": [
       {
@@ -64,7 +64,7 @@
     ]
   },
   {
-    "section": "Responsive & adaptable",
+    "title": "Responsive & adaptable",
     "allChecked": false,
     "items": [
       {
@@ -80,7 +80,7 @@
     ]
   },
   {
-    "section": "Screen readers & accessible names",
+    "title": "Screen readers & accessible names",
     "allChecked": false,
     "items": [
       {
