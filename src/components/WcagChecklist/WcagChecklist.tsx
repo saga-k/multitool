@@ -2,6 +2,18 @@ import React from 'react'
 import { useEffect, useState, useReducer } from 'react'
 import './WcagChecklist.module.css'
 
+interface listObject{
+  title:string,
+  allChecked: boolean
+  items: checkListItems[]
+}
+
+interface checkListItems{
+  text: string,
+  checked: boolean,
+  id: string
+}
+
 const initialState = {
   loading: true,
   fetchedList: null
@@ -11,6 +23,30 @@ function reducer(state, action){
 switch(action.type){
   case 'FETCH_SUCCESS':
   return {...state, loading: false, data: action.payload}
+
+  case 'TOGGLE_BOX':{
+    const {groupIndex, itemIndex, checked} = action.payload;
+    const updatedGroups = state.data.map((group:listObject, i: number) => {
+      if(i !== groupIndex) return group
+
+      const updatedItems = group.items.map((item, j) =>
+      j === itemIndex ? {...item, checked: checked} : item
+      )
+
+      const allChecked = updatedItems.every((item) => item.checked)
+
+      return{
+        ...group,
+        items: updatedItems,
+        allChecked: allChecked
+      }
+    })
+
+    return{
+      ...state,
+      data: updatedGroups
+    }
+  }
 }
 
 }
@@ -18,18 +54,6 @@ switch(action.type){
 export default function WcagChecklist() {
 
   const [state, dispatch] = useReducer(reducer, initialState)
-
-  interface listObject{
-    title:string,
-    allChecked: boolean
-    items: checkListItems[]
-  }
-
-  interface checkListItems{
-    text: string,
-    checked: boolean,
-    id: string
-  }
 
   async function fetchList(){
 
@@ -46,22 +70,27 @@ export default function WcagChecklist() {
     }
   }
 
-  useEffect(() => {fetchList(),[]})
+  useEffect(() => {fetchList()}, [])
+  useEffect(() => {
+    console.log('State changed:', state);
+  }, [state]);
+
 
 
 
 
   return (
     <section>
-      {state.data?.map((title:listObject) =>
+      {state.data?.map((title:listObject, parentIndex : number) =>
         <div className='listTitle'
         key={title.title}>
           <h4>{title.title}</h4>
+          {title.allChecked && <p className='done'>allChecked</p>}
           <ul>
-          {title.items.map((item : checkListItems) =>
+          {title.items.map((item : checkListItems, childIndex) =>
           <li className='listItem'
           key={item.id}>
-          <input type='checkBox' value={item.id}/>
+          <input type='checkbox' value={item.id} onChange={ (e) => dispatch({type:'TOGGLE_BOX', payload: {groupIndex: parentIndex, itemIndex: childIndex, checked: e.target.checked} })}/>
           {item.text}
           </li>)}
           </ul>
@@ -69,23 +98,3 @@ export default function WcagChecklist() {
     </section>
   )
 }
-
-{/*
-function handleChange(e:React.ChangeEvent<HTMLInputElement>, listObject: listObject){
-  const l = [...list]
-  const s = l.find((obj) => obj.section === listObject.section)
-  const items = [...s.items]
-  console.log(items)
-  const found = items.find((item) => item.id === e.target.value)
-  console.log('found',found)
-  found.checked = e.target.checked
-
-
-            <ul>
-          {state.data.items && state.data.items.map((item, section, index) =>
-            <li className='listItem' key={item.id}>
-              <input type='checkbox' value={item.id} onChange={(event) => handleChange(event, section, index)}/>
-              <p>{item.text}</p>
-            </li>)}
-          </ul>
-}*/}
