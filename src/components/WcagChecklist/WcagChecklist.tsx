@@ -16,7 +16,7 @@ interface checkListItems{
 
 interface state {
   loading:boolean,
-  data: listObject[]
+  data: listObject[] | null
 }
 
 type action =
@@ -24,44 +24,52 @@ type action =
   | { type: 'TOGGLE_BOX'; payload: { groupIndex: number; itemIndex: number; checked: boolean } };
 
 
-const initialState = {
-  loading: true,
-  fetchedList: null
-}
 
 function reducer(state:state, action:action){
-switch(action.type){
-  case 'FETCH_SUCCESS':
-  return {...state, loading: false, data: action.payload}
+  switch(action.type){
+    case 'FETCH_SUCCESS':
+    return {...state, loading: false, data: action.payload}
 
-  case 'TOGGLE_BOX':{
-    const {groupIndex, itemIndex, checked} = action.payload;
-    const updatedGroups = state.data.map((group:listObject, i: number) => {
-      if(i !== groupIndex) return group
+    case 'TOGGLE_BOX':{
+      const {groupIndex, itemIndex, checked} = action.payload;
 
-      const updatedItems = group.items.map((item, j) =>
-      j === itemIndex ? {...item, checked: checked} : item
-      )
+      if(state.data){
+        const updatedGroups = state.data.map((group:listObject, i: number) => {
+          if(i !== groupIndex) return group
 
-      const allChecked = updatedItems.every((item) => item.checked)
+          const updatedItems = group.items.map((item, j) =>
+          j === itemIndex ? {...item, checked: checked} : item
+          )
 
-      return{
-        ...group,
-        items: updatedItems,
-        allChecked: allChecked
+          const allChecked = updatedItems.every((item) => item.checked)
+
+          return{
+            ...group,
+            items: updatedItems,
+            allChecked: allChecked
+          }
+        })
+
+        return{
+          ...state,
+          data: updatedGroups
+        }
       }
-    })
-
-    return{
-      ...state,
-      data: updatedGroups
+      else {
+        return state
+      }
     }
+
+    default: return state
   }
 }
 
-}
-
 export default function WcagChecklist() {
+
+  const initialState = {
+    loading: true,
+    data: null
+  }
 
   const [state, dispatch] = useReducer(reducer, initialState)
 
@@ -82,6 +90,17 @@ export default function WcagChecklist() {
 
   useEffect(() => {fetchList()}, [])
 
+  const [openGroupIndex, setOpenGroupIndex] = useState<number[]>([])
+
+  function toggleDisplayed(index:number){
+    if(openGroupIndex.some(number => number === index)){
+      const newArray = openGroupIndex.filter(number => number !== index)
+      setOpenGroupIndex(newArray)
+    } else{
+      setOpenGroupIndex([...openGroupIndex, index])
+    }
+
+  }
 
   return (
     <section>
@@ -90,14 +109,15 @@ export default function WcagChecklist() {
         key={title.title}>
           <h4>{title.title}</h4>
           {title.allChecked && <p className='done'>allChecked</p>}
-          <ul>
+          <button className='toggleButton' onClick={()=>toggleDisplayed(parentIndex)}>Toggle</button>
+          {openGroupIndex.includes(parentIndex) && <ul>
           {title.items.map((item : checkListItems, childIndex) =>
           <li className='listItem'
           key={item.id}>
           <input type='checkbox' value={item.id} onChange={ (e) => dispatch({type:'TOGGLE_BOX', payload: {groupIndex: parentIndex, itemIndex: childIndex, checked: e.target.checked} })}/>
           {item.text}
           </li>)}
-          </ul>
+          </ul>}
         </div>)}
     </section>
   )
