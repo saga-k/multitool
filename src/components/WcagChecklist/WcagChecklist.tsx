@@ -14,12 +14,22 @@ interface checkListItems{
   id: string
 }
 
+interface state {
+  loading:boolean,
+  data: listObject[]
+}
+
+type action =
+  | {type: 'FETCH_SUCCESS', payload: listObject[]}
+  | { type: 'TOGGLE_BOX'; payload: { groupIndex: number; itemIndex: number; checked: boolean } };
+
+
 const initialState = {
   loading: true,
   fetchedList: null
 }
 
-function reducer(state, action){
+function reducer(state:state, action:action){
 switch(action.type){
   case 'FETCH_SUCCESS':
   return {...state, loading: false, data: action.payload}
@@ -71,12 +81,6 @@ export default function WcagChecklist() {
   }
 
   useEffect(() => {fetchList()}, [])
-  useEffect(() => {
-    console.log('State changed:', state);
-  }, [state]);
-
-
-
 
 
   return (
