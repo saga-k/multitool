@@ -1,0 +1,17 @@
+table{
+border: solid black 1px;
+}
+
+tr, th, td{
+  text-align: left;
+}
+
+th{
+  background-color: var(--accent);
+  color: var(--bg1);
+}
+
+.leftTitle{
+  background-color: var(--bg3);
+
+}

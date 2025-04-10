@@ -1,3 +1,30 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --bg1: #F9F9FB;
+  --bg2: #eaecf0;
+  --bg3: #D4D8E2;
+  --elements: #C2C7D6;
+  --accent: #2364E6;
+  --accent-hover:#2252B4;
+  --t1: #38393A;
+  --t2: #5B5B5B;
+}
+
+body{
+  background-color: var(--bg1);
+}
+
 section{
-  border: solid black 1px;
+  background-color: var(--bg2);
+  border: solid 1px var(--elements);
+  border-radius: 5px;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, span, th, td{
+  font-family:Arial, Helvetica, sans-serif;
+  color: #38393A;
 }

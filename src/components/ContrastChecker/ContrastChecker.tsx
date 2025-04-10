@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import styles from './ContrastChecker.module.css'
 
 interface rgb {R:number, G:number, B: number}
 
@@ -87,17 +88,17 @@ export default function ContrastChecker() {
 
       <tbody>
         <tr>
-          <th>Normal text</th>
+          <td className={styles.leftTitle}>Normal text</td>
           <td>{Number(contrast) > 4.5 ? 'yes' : 'no'}</td>
           <td>{Number(contrast) > 7 ? 'yes' : 'no'}</td>
         </tr>
         <tr>
-          <th>Large text</th>
+          <td className={styles.leftTitle}>Large text</td>
           <td>{Number(contrast) > 3.0 ? 'yes' : 'no'}</td>
           <td>{Number(contrast) > 4.5 ? 'yes' : 'no'}</td>
         </tr>
         <tr>
-          <th>UI elements</th>
+          <td className={styles.leftTitle}>UI elements</td>
           <td>{Number(contrast) > 3.0 ? 'yes' : 'no'}</td>
           <td>{Number(contrast) > 3.0 ? 'yes' : 'no'}</td>
         </tr>
